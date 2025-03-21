@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Calendar, BarChart3, MessageSquare, Users } from "lucide-react";
@@ -135,7 +136,7 @@ const Index: React.FC<IndexProps> = ({ authContext }) => {
 
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl"></div>
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-rose-500/5 rounded-full blur-3xl"></div>
         </div>
       </section>
 
@@ -179,7 +180,7 @@ const Index: React.FC<IndexProps> = ({ authContext }) => {
 
       <section className="py-20 relative overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto bg-gradient-to-r from-primary/80 to-blue-600/80 rounded-2xl p-8 md:p-12 backdrop-blur-sm relative overflow-hidden shadow-lg">
+          <div className="max-w-5xl mx-auto bg-gradient-to-r from-primary/80 to-rose-600/80 rounded-2xl p-8 md:p-12 backdrop-blur-sm relative overflow-hidden shadow-lg">
             <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-white/10 rounded-full blur-xl"></div>
             <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-60 h-60 bg-white/10 rounded-full blur-xl"></div>
             
