@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Calendar, BarChart3, MessageSquare, Users } from "lucide-react";
@@ -19,7 +18,6 @@ interface IndexProps {
 const Index: React.FC<IndexProps> = ({ authContext }) => {
   const featuresRef = useRef<HTMLDivElement>(null);
 
-  // Intersection Observer for scroll animations - modified to make animations more reliable
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -27,15 +25,15 @@ const Index: React.FC<IndexProps> = ({ authContext }) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("animate-fade-in");
             entry.target.classList.remove("opacity-0");
+            observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -100px 0px" }
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
     );
 
     const elements = document.querySelectorAll(".scroll-reveal");
     elements.forEach((el) => {
-      // Set initial opacity but don't animate out if already visible
       if (!el.classList.contains("animate-fade-in")) {
         el.classList.add("opacity-0");
       }
@@ -80,7 +78,6 @@ const Index: React.FC<IndexProps> = ({ authContext }) => {
     });
   };
 
-  // Determine button links based on authentication status
   const getStudentLink = () => {
     if (authContext?.isLoggedIn) {
       if (authContext.userRole === 'student') {
@@ -108,7 +105,6 @@ const Index: React.FC<IndexProps> = ({ authContext }) => {
     <div className="flex flex-col min-h-screen">
       <Navbar authContext={authContext} />
 
-      {/* Hero Section */}
       <section className="pt-32 pb-20 md:pt-40 md:pb-32 bg-background relative overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
@@ -137,14 +133,12 @@ const Index: React.FC<IndexProps> = ({ authContext }) => {
           </div>
         </div>
 
-        {/* Background elements */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl"></div>
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-3xl"></div>
         </div>
       </section>
 
-      {/* Features Section */}
       <section
         ref={featuresRef}
         className="py-20 bg-secondary/50"
@@ -183,11 +177,9 @@ const Index: React.FC<IndexProps> = ({ authContext }) => {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-20 relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto bg-gradient-to-r from-primary/80 to-blue-600/80 rounded-2xl p-8 md:p-12 backdrop-blur-sm relative overflow-hidden shadow-lg">
-            {/* Decorative shapes */}
             <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-white/10 rounded-full blur-xl"></div>
             <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-60 h-60 bg-white/10 rounded-full blur-xl"></div>
             
