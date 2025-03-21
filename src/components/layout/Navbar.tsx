@@ -1,16 +1,29 @@
 
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { X, Menu, Moon, Sun, LogIn } from "lucide-react";
+import { X, Menu, Moon, Sun, LogIn, LogOut, User } from "lucide-react";
 import CustomButton from "../ui/CustomButton";
 import CustomAvatar from "../ui/CustomAvatar";
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  authContext?: {
+    isLoggedIn: boolean;
+    userRole: 'student' | 'teacher' | null;
+    onSignIn: (role: 'student' | 'teacher') => void;
+    onSignOut: () => void;
+  };
+}
+
+const Navbar: React.FC<NavbarProps> = ({ authContext }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // This would connect to actual auth state
+  const [showSignInOptions, setShowSignInOptions] = useState(false);
   const location = useLocation();
+
+  // Use auth context if provided, otherwise use local state
+  const isLoggedIn = authContext?.isLoggedIn || false;
+  const userRole = authContext?.userRole || null;
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   
@@ -39,18 +52,41 @@ const Navbar: React.FC = () => {
   }, []);
   
   useEffect(() => {
-    // Close mobile menu when route changes
+    // Close mobile menu and sign in options when route changes
     setIsMenuOpen(false);
+    setShowSignInOptions(false);
   }, [location]);
 
   const isActive = (path: string) => {
     return location.pathname === path;
   };
 
+  const handleSignIn = (role: 'student' | 'teacher') => {
+    if (authContext?.onSignIn) {
+      authContext.onSignIn(role);
+    }
+    setShowSignInOptions(false);
+  };
+
+  const handleSignOut = () => {
+    if (authContext?.onSignOut) {
+      authContext.onSignOut();
+    }
+  };
+
   const navLinks = [
     { text: "Home", path: "/" },
-    { text: "Student Portal", path: "/student" },
-    { text: "Teacher Portal", path: "/teacher" },
+    ...(isLoggedIn && userRole === 'student' ? [
+      { text: "Dashboard", path: "/student" },
+      { text: "My Profile", path: "/student/profile" }
+    ] : []),
+    ...(isLoggedIn && userRole === 'teacher' ? [
+      { text: "Dashboard", path: "/teacher" }
+    ] : []),
+    ...(isLoggedIn ? [] : [
+      { text: "Student Portal", path: "/student" },
+      { text: "Teacher Portal", path: "/teacher" }
+    ]),
     { text: "About", path: "/about" },
   ];
 
@@ -99,21 +135,70 @@ const Navbar: React.FC = () => {
             </button>
 
             {isLoggedIn ? (
-              <CustomAvatar 
-                src="" 
-                alt="User Profile" 
-                size="sm" 
-                className="cursor-pointer"
-              />
+              <div className="relative">
+                <CustomAvatar 
+                  src="" 
+                  alt="User Profile" 
+                  size="sm" 
+                  className="cursor-pointer"
+                  onClick={() => setShowSignInOptions(!showSignInOptions)}
+                />
+                {showSignInOptions && (
+                  <div className="absolute right-0 mt-2 w-48 bg-background rounded-md shadow-lg overflow-hidden z-20 border border-border">
+                    <div className="py-2">
+                      <div className="px-4 py-2 text-sm text-foreground border-b border-border">
+                        Signed in as <span className="font-medium">{userRole}</span>
+                      </div>
+                      <Link
+                        to={userRole === 'student' ? "/student/profile" : "/teacher"}
+                        className="block px-4 py-2 text-sm text-foreground hover:bg-background hover:text-primary"
+                        onClick={() => setShowSignInOptions(false)}
+                      >
+                        <User size={16} className="inline mr-2" />
+                        Profile
+                      </Link>
+                      <button
+                        className="block w-full text-left px-4 py-2 text-sm text-foreground hover:bg-background hover:text-destructive"
+                        onClick={handleSignOut}
+                      >
+                        <LogOut size={16} className="inline mr-2" />
+                        Sign Out
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             ) : (
-              <CustomButton 
-                variant="primary" 
-                size="sm" 
-                className="animate-fade-in"
-              >
-                <LogIn size={16} className="mr-2" />
-                Sign In
-              </CustomButton>
+              <div className="relative">
+                <CustomButton 
+                  variant="primary" 
+                  size="sm" 
+                  className="animate-fade-in"
+                  onClick={() => setShowSignInOptions(!showSignInOptions)}
+                >
+                  <LogIn size={16} className="mr-2" />
+                  Sign In
+                </CustomButton>
+                
+                {showSignInOptions && (
+                  <div className="absolute right-0 mt-2 w-48 bg-background rounded-md shadow-lg overflow-hidden z-20 border border-border">
+                    <div className="py-2">
+                      <button
+                        className="block w-full text-left px-4 py-2 text-sm text-foreground hover:bg-background hover:text-primary"
+                        onClick={() => handleSignIn('student')}
+                      >
+                        Sign in as Student
+                      </button>
+                      <button
+                        className="block w-full text-left px-4 py-2 text-sm text-foreground hover:bg-background hover:text-primary"
+                        onClick={() => handleSignIn('teacher')}
+                      >
+                        Sign in as Teacher
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             )}
           </div>
         </nav>
@@ -158,14 +243,38 @@ const Navbar: React.FC = () => {
                 </li>
               ))}
               
-              {!isLoggedIn && (
+              {!isLoggedIn ? (
+                <>
+                  <li className="pt-3 border-t border-border">
+                    <CustomButton 
+                      variant="primary" 
+                      className="w-full justify-center mb-2"
+                      onClick={() => handleSignIn('student')}
+                    >
+                      <LogIn size={16} className="mr-2" />
+                      Sign In as Student
+                    </CustomButton>
+                  </li>
+                  <li>
+                    <CustomButton 
+                      variant="outline" 
+                      className="w-full justify-center"
+                      onClick={() => handleSignIn('teacher')}
+                    >
+                      <LogIn size={16} className="mr-2" />
+                      Sign In as Teacher
+                    </CustomButton>
+                  </li>
+                </>
+              ) : (
                 <li className="pt-3 border-t border-border">
                   <CustomButton 
-                    variant="primary" 
+                    variant="destructive" 
                     className="w-full justify-center"
+                    onClick={handleSignOut}
                   >
-                    <LogIn size={16} className="mr-2" />
-                    Sign In
+                    <LogOut size={16} className="mr-2" />
+                    Sign Out
                   </CustomButton>
                 </li>
               )}

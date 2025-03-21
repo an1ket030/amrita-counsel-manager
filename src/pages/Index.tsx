@@ -7,7 +7,16 @@ import Footer from "@/components/layout/Footer";
 import CustomButton from "@/components/ui/CustomButton";
 import { CustomCard, CardContent } from "@/components/ui/CustomCard";
 
-const Index: React.FC = () => {
+interface IndexProps {
+  authContext?: {
+    isLoggedIn: boolean;
+    userRole: 'student' | 'teacher' | null;
+    onSignIn: (role: 'student' | 'teacher') => void;
+    onSignOut: () => void;
+  };
+}
+
+const Index: React.FC<IndexProps> = ({ authContext }) => {
   const featuresRef = useRef<HTMLDivElement>(null);
 
   // Intersection Observer for scroll animations
@@ -68,9 +77,33 @@ const Index: React.FC = () => {
     });
   };
 
+  // Determine button links based on authentication status
+  const getStudentLink = () => {
+    if (authContext?.isLoggedIn) {
+      if (authContext.userRole === 'student') {
+        return "/student";
+      }
+      return "/"; // If logged in but not a student, just stay on home
+    }
+    return "/student"; // If not logged in, go to student portal (will redirect to sign in)
+  };
+
+  const getTeacherLink = () => {
+    if (authContext?.isLoggedIn) {
+      if (authContext.userRole === 'teacher') {
+        return "/teacher";
+      }
+      return "/"; // If logged in but not a teacher, just stay on home
+    }
+    return "/teacher"; // If not logged in, go to teacher portal (will redirect to sign in)
+  };
+
+  const studentLink = getStudentLink();
+  const teacherLink = getTeacherLink();
+
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
+      <Navbar authContext={authContext} />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 md:pt-40 md:pb-32 bg-background relative overflow-hidden">
@@ -86,13 +119,13 @@ const Index: React.FC = () => {
               A comprehensive platform connecting students with faculty for personalized academic counseling and performance tracking.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-in-bottom" style={{ animationDelay: "0.2s" }}>
-              <Link to="/student">
+              <Link to={studentLink}>
                 <CustomButton size="lg" className="w-full sm:w-auto">
                   Student Portal
                   <ArrowRight size={16} className="ml-2" />
                 </CustomButton>
               </Link>
-              <Link to="/teacher">
+              <Link to={teacherLink}>
                 <CustomButton variant="outline" size="lg" className="w-full sm:w-auto">
                   Teacher Portal
                 </CustomButton>
@@ -164,7 +197,7 @@ const Index: React.FC = () => {
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/student">
+                <Link to={studentLink}>
                   <CustomButton
                     variant="secondary"
                     size="lg"
