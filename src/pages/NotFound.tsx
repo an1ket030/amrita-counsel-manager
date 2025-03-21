@@ -1,5 +1,10 @@
-import { useLocation } from "react-router-dom";
+
+import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
+import { Home, AlertTriangle } from "lucide-react";
+import CustomButton from "@/components/ui/CustomButton";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 const NotFound = () => {
   const location = useLocation();
@@ -12,14 +17,31 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">404</h1>
-        <p className="text-xl text-gray-600 mb-4">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 hover:text-blue-700 underline">
-          Return to Home
-        </a>
-      </div>
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      
+      <main className="flex-1 flex items-center justify-center px-4 py-20">
+        <div className="text-center max-w-md mx-auto">
+          <div className="flex justify-center mb-6">
+            <div className="rounded-full bg-red-500/10 p-3">
+              <AlertTriangle size={50} className="text-red-500" />
+            </div>
+          </div>
+          
+          <h1 className="text-5xl font-bold mb-4 animate-fade-in">404</h1>
+          <p className="text-xl text-muted-foreground mb-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+            Oops! The page you are looking for doesn't exist.
+          </p>
+          
+          <Link to="/" className="inline-block animate-fade-in" style={{ animationDelay: "0.2s" }}>
+            <CustomButton className="gap-2">
+              <Home size={16} /> Return to Home
+            </CustomButton>
+          </Link>
+        </div>
+      </main>
+      
+      <Footer />
     </div>
   );
 };
