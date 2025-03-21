@@ -19,23 +19,26 @@ interface IndexProps {
 const Index: React.FC<IndexProps> = ({ authContext }) => {
   const featuresRef = useRef<HTMLDivElement>(null);
 
-  // Intersection Observer for scroll animations
+  // Intersection Observer for scroll animations - modified to make animations more reliable
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("animate-fade-in");
-            observer.unobserve(entry.target);
+            entry.target.classList.remove("opacity-0");
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: "0px 0px -100px 0px" }
     );
 
     const elements = document.querySelectorAll(".scroll-reveal");
     elements.forEach((el) => {
-      el.classList.add("opacity-0");
+      // Set initial opacity but don't animate out if already visible
+      if (!el.classList.contains("animate-fade-in")) {
+        el.classList.add("opacity-0");
+      }
       observer.observe(el);
     });
 
@@ -145,6 +148,7 @@ const Index: React.FC<IndexProps> = ({ authContext }) => {
       <section
         ref={featuresRef}
         className="py-20 bg-secondary/50"
+        id="features"
       >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16 scroll-reveal">

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { X, Menu, Moon, Sun, LogIn, LogOut, User } from "lucide-react";
@@ -21,7 +20,6 @@ const Navbar: React.FC<NavbarProps> = ({ authContext }) => {
   const [showSignInOptions, setShowSignInOptions] = useState(false);
   const location = useLocation();
 
-  // Use auth context if provided, otherwise use local state
   const isLoggedIn = authContext?.isLoggedIn || false;
   const userRole = authContext?.userRole || null;
 
@@ -52,7 +50,6 @@ const Navbar: React.FC<NavbarProps> = ({ authContext }) => {
   }, []);
   
   useEffect(() => {
-    // Close mobile menu and sign in options when route changes
     setIsMenuOpen(false);
     setShowSignInOptions(false);
   }, [location]);
@@ -106,7 +103,6 @@ const Navbar: React.FC<NavbarProps> = ({ authContext }) => {
           <span className="text-gradient">Amrita Counselling</span>
         </Link>
 
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           <ul className="flex space-x-6">
             {navLinks.map((link) => (
@@ -203,7 +199,6 @@ const Navbar: React.FC<NavbarProps> = ({ authContext }) => {
           </div>
         </nav>
 
-        {/* Mobile Menu Button */}
         <div className="flex items-center md:hidden space-x-3">
           <button
             onClick={toggleDarkMode}
@@ -223,7 +218,6 @@ const Navbar: React.FC<NavbarProps> = ({ authContext }) => {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
       {isMenuOpen && (
         <div className="md:hidden absolute top-full left-0 w-full bg-background/95 backdrop-blur-lg shadow-lg border-t border-border animate-slide-in-top">
           <nav className="container mx-auto px-4 py-5">
@@ -269,8 +263,8 @@ const Navbar: React.FC<NavbarProps> = ({ authContext }) => {
               ) : (
                 <li className="pt-3 border-t border-border">
                   <CustomButton 
-                    variant="destructive" 
-                    className="w-full justify-center"
+                    variant="outline" 
+                    className="w-full justify-center text-destructive hover:text-destructive hover:bg-destructive/10"
                     onClick={handleSignOut}
                   >
                     <LogOut size={16} className="mr-2" />
