@@ -23,9 +23,9 @@ const CustomButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
     };
     
     const sizes = {
-      sm: "text-xs h-8 px-3",
-      md: "text-sm h-10 px-4",
-      lg: "text-base h-12 px-6",
+      sm: "text-xs h-8 px-3 py-1.5",
+      md: "text-sm h-10 px-4 py-2",
+      lg: "text-base h-12 px-6 py-2.5",
       icon: "h-10 w-10 p-0",
     };
     
@@ -66,7 +66,7 @@ const CustomButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
             </svg>
           </div>
         )}
-        <span className={isLoading ? "opacity-0" : ""}>{children}</span>
+        <span className={cn("flex items-center justify-center", isLoading ? "opacity-0" : "")}>{children}</span>
       </button>
     );
   }
