@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -121,5 +122,6 @@
   }
   
   .gradient-border {
-    @apply relative before:absolute before:inset-0 before:p-[1px] before:rounded-lg before:bg-gradient-to-br before:from-primary/50 before:to-
-
+    @apply relative before:absolute before:inset-0 before:p-[1px] before:rounded-lg before:bg-gradient-to-br before:from-primary/50 before:to-rose-500/50 before:content-[''];
+  }
+}
