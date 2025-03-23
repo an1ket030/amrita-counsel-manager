@@ -102,11 +102,11 @@
 
 @layer utilities {
   .glass {
-    @apply bg-secondary/80 backdrop-blur-lg border border-secondary shadow-sm;
+    @apply bg-white/10 backdrop-blur-lg border border-white/20 rounded-lg shadow-sm;
   }
   
   .dark .glass {
-    @apply bg-black/50 backdrop-blur-lg border border-white/10;
+    @apply bg-black/20 backdrop-blur-lg border border-white/10;
   }
   
   .text-balance {
