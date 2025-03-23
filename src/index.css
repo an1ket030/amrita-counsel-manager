@@ -98,6 +98,36 @@
     @apply bg-background text-foreground min-h-screen;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
   }
+  
+  /* Home page specific styling */
+  .home-page {
+    background-color: #A3113E;
+    color: #F6F6F7;
+  }
+  
+  .home-page .text-gradient {
+    @apply bg-gradient-to-r from-yellow-200 to-yellow-50 bg-clip-text text-transparent;
+  }
+  
+  .home-page .custom-button-primary {
+    @apply bg-gradient-to-r from-yellow-400 to-amber-500 text-stone-800 hover:from-yellow-500 hover:to-amber-600;
+  }
+  
+  .home-page .custom-button-secondary {
+    @apply bg-transparent border border-yellow-200 text-yellow-100 hover:bg-yellow-900/20;
+  }
+  
+  .home-page .feature-card {
+    @apply bg-gradient-to-br from-rose-800/40 to-rose-900/40 backdrop-blur-sm border border-rose-800/30;
+  }
+  
+  .home-page .feature-card-icon {
+    @apply bg-rose-800/30 text-yellow-200;
+  }
+  
+  .home-page .cta-section {
+    @apply bg-gradient-to-r from-rose-800/80 to-rose-700/80;
+  }
 }
 
 @layer utilities {
