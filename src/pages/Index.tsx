@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Calendar, BarChart3, MessageSquare, Users } from "lucide-react";
@@ -108,8 +109,12 @@ const Index: React.FC<IndexProps> = ({ authContext }) => {
       <section className="pt-32 pb-20 md:pt-40 md:pb-32 relative overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-block mb-4 px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-200 text-sm font-medium animate-fade-in">
-              Amrita University
+            <div className="flex justify-center mb-6 animate-fade-in">
+              <img 
+                src="/amrita-logo.png" 
+                alt="Amrita University Logo" 
+                className="h-16 md:h-20"
+              />
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 animate-slide-in-bottom" style={{ textWrap: "balance" }}>
               AI-Powered <span className="text-gradient">Counselling Management</span> for Academic Success
