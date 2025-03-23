@@ -101,59 +101,59 @@
   
   /* Home page specific styling */
   .home-page {
-    @apply bg-background text-foreground;
+    @apply bg-white text-gray-800;
   }
   
   .home-page .text-gradient {
-    @apply bg-gradient-to-r from-primary via-primary/90 to-primary/80 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#A3113E] via-[#B82955] to-[#CF4571] bg-clip-text text-transparent;
   }
   
   .home-page .custom-button-primary {
-    @apply bg-primary text-white hover:bg-primary/90 transition-colors duration-300;
+    @apply bg-[#A3113E] text-white hover:bg-[#B82955] transition-colors duration-300;
   }
   
   .home-page .custom-button-secondary {
-    @apply bg-transparent border border-primary/30 text-primary hover:bg-primary/10;
+    @apply bg-transparent border border-[#A3113E]/30 text-[#A3113E] hover:bg-[#A3113E]/10;
   }
   
   .home-page .feature-card {
-    @apply bg-card border border-border;
+    @apply bg-white border border-[#A3113E]/20 shadow-sm;
   }
   
   .home-page .feature-card-icon {
-    @apply bg-primary/10 text-primary;
+    @apply bg-[#A3113E]/10 text-[#A3113E];
   }
   
   .home-page .cta-section {
-    @apply bg-card border border-border;
+    @apply bg-gradient-to-br from-[#A3113E]/5 to-[#A3113E]/10 border border-[#A3113E]/20;
   }
   
   .dark .home-page {
-    @apply bg-background text-foreground;
+    @apply bg-[#1E293B] text-gray-100;
   }
   
   .dark .home-page .text-gradient {
-    @apply bg-gradient-to-r from-primary via-primary/90 to-primary/80 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#A3113E] via-[#B82955] to-[#CF4571] bg-clip-text text-transparent;
   }
   
   .dark .home-page .custom-button-primary {
-    @apply bg-primary text-white hover:bg-primary/90;
+    @apply bg-[#A3113E] text-white hover:bg-[#B82955];
   }
   
   .dark .home-page .custom-button-secondary {
-    @apply bg-transparent border border-primary/30 text-primary hover:bg-primary/20;
+    @apply bg-transparent border border-[#A3113E]/30 text-[#A3113E] hover:bg-[#A3113E]/20;
   }
   
   .dark .home-page .feature-card {
-    @apply bg-card/50 backdrop-blur-sm border border-border;
+    @apply bg-gray-800/50 backdrop-blur-sm border border-[#A3113E]/20;
   }
   
   .dark .home-page .feature-card-icon {
-    @apply bg-primary/20 text-primary;
+    @apply bg-[#A3113E]/20 text-[#A3113E];
   }
   
   .dark .home-page .cta-section {
-    @apply bg-card/50 backdrop-blur-sm border border-border;
+    @apply bg-gradient-to-br from-[#A3113E]/10 to-[#A3113E]/20 backdrop-blur-sm border border-[#A3113E]/20;
   }
 }
 
