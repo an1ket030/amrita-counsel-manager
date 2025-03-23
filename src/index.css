@@ -55,7 +55,7 @@
     --popover: 222 47% 11%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 346 82% 35%;  /* #A3113E */
+    --primary: 346 82% 35%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 346 30% 17%;
@@ -76,7 +76,7 @@
 
     --sidebar-background: 222 47% 11%;
     --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 346 82% 35%;  /* #A3113E */
+    --sidebar-primary: 346 82% 35%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 346 30% 17%;
     --sidebar-accent-foreground: 210 40% 98%;
@@ -95,65 +95,8 @@
   }
   
   body {
-    @apply bg-background text-foreground min-h-screen transition-colors duration-300;
+    @apply bg-background text-foreground min-h-screen;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
-  }
-  
-  /* Home page specific styling */
-  .home-page {
-    @apply bg-white text-gray-800;
-  }
-  
-  .home-page .text-gradient {
-    @apply bg-gradient-to-r from-[#A3113E] via-[#B82955] to-[#CF4571] bg-clip-text text-transparent;
-  }
-  
-  .home-page .custom-button-primary {
-    @apply bg-[#A3113E] text-white hover:bg-[#B82955] transition-colors duration-300;
-  }
-  
-  .home-page .custom-button-secondary {
-    @apply bg-transparent border border-[#A3113E]/30 text-[#A3113E] hover:bg-[#A3113E]/10;
-  }
-  
-  .home-page .feature-card {
-    @apply bg-white border border-[#A3113E]/20 shadow-sm;
-  }
-  
-  .home-page .feature-card-icon {
-    @apply bg-[#A3113E]/10 text-[#A3113E];
-  }
-  
-  .home-page .cta-section {
-    @apply bg-gradient-to-br from-[#A3113E]/5 to-[#A3113E]/10 border border-[#A3113E]/20;
-  }
-  
-  .dark .home-page {
-    @apply bg-[#1E293B] text-gray-100;
-  }
-  
-  .dark .home-page .text-gradient {
-    @apply bg-gradient-to-r from-[#A3113E] via-[#B82955] to-[#CF4571] bg-clip-text text-transparent;
-  }
-  
-  .dark .home-page .custom-button-primary {
-    @apply bg-[#A3113E] text-white hover:bg-[#B82955];
-  }
-  
-  .dark .home-page .custom-button-secondary {
-    @apply bg-transparent border border-[#A3113E]/30 text-[#A3113E] hover:bg-[#A3113E]/20;
-  }
-  
-  .dark .home-page .feature-card {
-    @apply bg-gray-800/50 backdrop-blur-sm border border-[#A3113E]/20;
-  }
-  
-  .dark .home-page .feature-card-icon {
-    @apply bg-[#A3113E]/20 text-[#A3113E];
-  }
-  
-  .dark .home-page .cta-section {
-    @apply bg-gradient-to-br from-[#A3113E]/10 to-[#A3113E]/20 backdrop-blur-sm border border-[#A3113E]/20;
   }
 }
 

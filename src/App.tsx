@@ -20,16 +20,8 @@ const App = () => {
 
   // Check dark mode preference and auth state on initial load
   useEffect(() => {
-    // Check system preference for dark mode
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    // Check localStorage for user preference (overrides system preference)
-    const storedDarkMode = localStorage.getItem("darkMode");
-    
-    // Apply dark mode if either stored preference is true or (no stored preference and system prefers dark)
-    const shouldUseDarkMode = storedDarkMode === "true" || (storedDarkMode === null && prefersDark);
-    
-    // Apply dark mode class to document
-    document.documentElement.classList.toggle("dark", shouldUseDarkMode);
+    const darkModePreference = localStorage.getItem("darkMode") === "true";
+    document.documentElement.classList.toggle("dark", darkModePreference);
     
     // Check if user is logged in from localStorage
     const authState = localStorage.getItem("authState");

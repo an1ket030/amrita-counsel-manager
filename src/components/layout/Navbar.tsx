@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { X, Menu, Moon, Sun, LogIn, LogOut, User } from "lucide-react";
@@ -30,11 +29,7 @@ const Navbar: React.FC<NavbarProps> = ({ authContext }) => {
     const newDarkMode = !darkMode;
     setDarkMode(newDarkMode);
     document.documentElement.classList.toggle("dark", newDarkMode);
-    localStorage.setItem("darkMode", String(newDarkMode));
-    
-    // Log for debugging
-    console.log("Dark mode toggled:", newDarkMode);
-    console.log("Dark class present:", document.documentElement.classList.contains("dark"));
+    localStorage.setItem("darkMode", newDarkMode ? "true" : "false");
   };
   
   useEffect(() => {
@@ -46,17 +41,9 @@ const Navbar: React.FC<NavbarProps> = ({ authContext }) => {
       }
     };
     
-    // Initialize dark mode state from localStorage or system preference
-    const storedDarkMode = localStorage.getItem("darkMode");
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    // If there's a stored preference, use it; otherwise, check system preference
-    const initialDarkMode = storedDarkMode !== null 
-      ? storedDarkMode === "true" 
-      : systemPrefersDark;
-    
-    setDarkMode(initialDarkMode);
-    document.documentElement.classList.toggle("dark", initialDarkMode);
+    const storedDarkMode = localStorage.getItem("darkMode") === "true";
+    setDarkMode(storedDarkMode);
+    document.documentElement.classList.toggle("dark", storedDarkMode);
     
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
