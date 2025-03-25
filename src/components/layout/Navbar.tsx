@@ -100,7 +100,7 @@ const Navbar: React.FC<NavbarProps> = ({ authContext }) => {
           to="/" 
           className="flex items-center space-x-2 text-xl font-semibold animate-fade-in"
         >
-          <span className="text-gradient">Amrita Counselling</span>
+          <img src="/logo.jpg" alt="Amrita Logo" className="h-9 w-auto" />
         </Link>
 
         <nav className="hidden md:flex items-center space-x-8">
